@@ -84,7 +84,9 @@ smoke_url() {
 
 smoke_url_cors() {
     URL="$1"
+    SMOKE_CORS_METHOD="$2"
     _curl_options $URL
+    SMOKE_CORS_METHOD=""
 }
 
 smoke_url_ok() {
@@ -203,6 +205,10 @@ _curl() {
   if [[ -n "$SMOKE_ORIGIN" ]]
   then
     opt+=(-H "Origin: $SMOKE_ORIGIN")
+  fi
+  if [[ -n "$SMOKE_CORS_METHOD" ]]
+  then
+    opt+=(-H "access-control-request-method: $SMOKE_CORS_METHOD")
   fi
   curl "${opt[@]}" "$@" > $SMOKE_CURL_BODY
 }

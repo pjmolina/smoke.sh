@@ -156,8 +156,9 @@ smoke_origin "https://acme.corp"
 Then test for CORS headers using:
 
 ```bash
-smoke_url_cors "https://api.com/endpoint"
+smoke_url_cors "https://api.com/endpoint" "POST,GET"
     smoke_assert_headers "Access-Control-Allow-Credentials: true"
+    smoke_assert_headers "Access-Control-Allow-Methods: POST,GET"
     smoke_assert_headers "Access-Control-Allow-Origin: https://acme.corp"
 ```
 
